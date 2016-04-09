@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>52b72a94-4655-4780-bd25-7f8d5268c5f5</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NuProjPath Condition=" '$(NuProjPath)' == '' ">$(MSBuildExtensionsPath)\NuProj\</NuProjPath>
+  </PropertyGroup>
+  <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
+  <PropertyGroup Label="Configuration">
+    <Id>Xam.Plugin.CrossVideoPlayer</Id>
+    <Version>1.0.1</Version>
+    <Title>CrossVideoPlayer Control Plugin for Xamarin.Forms</Title>
+    <Authors>Houssem Dellai</Authors>
+    <Owners>Houssem Dellai</Owners>
+    <Summary>Cross video player element for Xamarin Forms. </Summary>
+    <Description>Cross video player element for Xamarin Forms. </Description>
+    <ReleaseNotes>xamarin, pcl, xam.pcl, plugin, plugin for xamarin.forms, windows phone, winphone, wp8, android, xamarin.forms, ios</ReleaseNotes>
+    <ProjectUrl>https://github.com/HoussemDellai/CrossVideoPlayer</ProjectUrl>
+    <LicenseUrl>https://github.com/HoussemDellai/CrossVideoPlayer</LicenseUrl>
+    <Copyright>
+    </Copyright>
+    <Tags>CrossVideoPlayer.FormsPlugin.nupkg</Tags>
+    <IconUrl>https://raw.githubusercontent.com/jamesmontemagno/Xamarin-Templates/master/Plugins-Templates/icons/plugin_icon_nuget.png</IconUrl>
+    <EmbedSourceFiles>true</EmbedSourceFiles>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.Abstractions\CrossVideoPlayer.FormsPlugin.Abstractions.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.Android\CrossVideoPlayer.FormsPlugin.Android.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.iOSUnified\CrossVideoPlayer.FormsPlugin.iOSUnified.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WindowsPhone\CrossVideoPlayer.FormsPlugin.WindowsPhone.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WinRT\CrossVideoPlayer.FormsPlugin.WinRT.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WinRT.Phone\CrossVideoPlayer.FormsPlugin.WinRT.Phone.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WinUWP\CrossVideoPlayer.FormsPlugin.WinUWP.csproj" />
+  </ItemGroup>
+  <Import Project="$(NuProjPath)\NuProj.targets" />
+</Project>

@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Windows.Controls;
 using CrossVideoPlayer.FormsPlugin.Abstractions;
 using Xamarin.Forms;
-using CrossVideoPlayer.FormsPlugin.WindowsPhone;
-using Xamarin.Forms.Platform.WinPhone;
+using CrossVideoPlayer.FormsPlugin.WinRT;
+using Xamarin.Forms.Platform.WinRT;
+using Windows.UI.Xaml.Controls;
 
 [assembly: ExportRenderer(typeof(CrossVideoPlayerView),
                           typeof(CrossVideoPlayerViewRenderer))]
 
-namespace CrossVideoPlayer.FormsPlugin.WindowsPhone
+namespace CrossVideoPlayer.FormsPlugin.WinRT
 {
     /// <summary>
     /// CrossVideoPlayer Renderer for Windows Phone Silverlight.
     /// </summary>
-    public class CrossVideoPlayerViewRenderer : ViewRenderer
+    public class CrossVideoPlayerViewRenderer : ViewRenderer<CrossVideoPlayerView, MediaElement>
     {
 
         /// <summary>
@@ -21,13 +21,13 @@ namespace CrossVideoPlayer.FormsPlugin.WindowsPhone
         /// </summary>
         public static void Init()
         {
-        }
+        }		
 
         /// <summary>
         /// Reload the view and hit up the MediaElement. 
         /// </summary>
         /// <param name="e"></param>
-        protected override void OnElementChanged(ElementChangedEventArgs<View> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<CrossVideoPlayerView> e)
         {
 
             base.OnElementChanged(e);
