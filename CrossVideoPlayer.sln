@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossVideoPlayer.FormsPlugin.Abstractions", "CrossVideoPlayer\CrossVideoPlayer.FormsPlugin.Abstractions\CrossVideoPlayer.FormsPlugin.Abstractions.csproj", "{14C534B6-1984-41A9-A384-D3A5508588E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossVideoPlayer.FormsPlugin", "CrossVideoPlayer\CrossVideoPlayer.FormsPlugin.Abstractions\CrossVideoPlayer.FormsPlugin.csproj", "{14C534B6-1984-41A9-A384-D3A5508588E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossVideoPlayer.FormsPlugin.iOSUnified", "CrossVideoPlayer\CrossVideoPlayer.FormsPlugin.iOSUnified\CrossVideoPlayer.FormsPlugin.iOSUnified.csproj", "{D525F236-6A2D-4010-B1CC-4A4B8581C90B}"
 EndProject
@@ -29,7 +29,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4AA556
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{76AC5972-963F-454F-B3E4-0AFB59A0C7AD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CrossVideoPlayer.FormsPlugin.Win.Shared", "CrossVideoPlayer\CrossVideoPlayer.FormsPlugin.Win.Shared\CrossVideoPlayer.FormsPlugin.Win.Shared.shproj", "{DE450DFC-3F74-4CEE-B0A9-BB69A2D3D3B4}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CrossVideoPlayer\CrossVideoPlayer.FormsPlugin.Win.Shared\CrossVideoPlayer.FormsPlugin.Win.Shared.projitems*{b499fe26-5e36-4737-b3c8-f6d32566f2ec}*SharedItemsImports = 4
+		CrossVideoPlayer\CrossVideoPlayer.FormsPlugin.Win.Shared\CrossVideoPlayer.FormsPlugin.Win.Shared.projitems*{de450dfc-3f74-4cee-b0a9-bb69a2d3d3b4}*SharedItemsImports = 13
+		CrossVideoPlayer\CrossVideoPlayer.FormsPlugin.Win.Shared\CrossVideoPlayer.FormsPlugin.Win.Shared.projitems*{4f4b0982-6108-4f3c-bd69-4d26c453821c}*SharedItemsImports = 4
+		CrossVideoPlayer\CrossVideoPlayer.FormsPlugin.Win.Shared\CrossVideoPlayer.FormsPlugin.Win.Shared.projitems*{c9d3b49b-65cb-4e82-b0f0-c4948296243c}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU
 		AppStore|ARM = AppStore|ARM
@@ -250,5 +258,6 @@ Global
 		{4F4B0982-6108-4F3C-BD69-4D26C453821C} = {4AA55640-0445-443E-9C88-6824FD7BBB19}
 		{B499FE26-5E36-4737-B3C8-F6D32566F2EC} = {4AA55640-0445-443E-9C88-6824FD7BBB19}
 		{C9D3B49B-65CB-4E82-B0F0-C4948296243C} = {4AA55640-0445-443E-9C88-6824FD7BBB19}
+		{DE450DFC-3F74-4CEE-B0A9-BB69A2D3D3B4} = {4AA55640-0445-443E-9C88-6824FD7BBB19}
 	EndGlobalSection
 EndGlobal

@@ -19,7 +19,7 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>Xam.Plugin.CrossVideoPlayer</Id>
-    <Version>1.0.1</Version>
+    <Version>1.0.4</Version>
     <Title>CrossVideoPlayer Control Plugin for Xamarin.Forms</Title>
     <Authors>Houssem Dellai</Authors>
     <Owners>Houssem Dellai</Owners>
@@ -39,7 +39,7 @@
     <Content Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.Abstractions\CrossVideoPlayer.FormsPlugin.Abstractions.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.Abstractions\CrossVideoPlayer.FormsPlugin.csproj" />
     <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.Android\CrossVideoPlayer.FormsPlugin.Android.csproj" />
     <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.iOSUnified\CrossVideoPlayer.FormsPlugin.iOSUnified.csproj" />
     <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WindowsPhone\CrossVideoPlayer.FormsPlugin.WindowsPhone.csproj" />

@@ -7,11 +7,10 @@ namespace CrossVideoPlayer.FormsPlugin.Abstractions
     /// </summary>
     public class CrossVideoPlayerView : View
     {
-
-        /// <summary>
-        /// The url source of the video.
-        /// </summary>
-        public static readonly BindableProperty VideoSourceProperty =
+		/// <summary>
+		/// The url source of the video.
+		/// </summary>
+		public static readonly BindableProperty VideoSourceProperty =
             BindableProperty.Create<CrossVideoPlayerView, string>(p => p.VideoSource, "");
 
         /// <summary>
@@ -29,10 +28,26 @@ namespace CrossVideoPlayer.FormsPlugin.Abstractions
             }
         }
 
-        /// <summary>
-        /// The scale format of the video which is in most cases 16:9 (1.77) or 4:3 (1.33).
-        /// </summary>
-        public static readonly BindableProperty VideoScaleProperty =
+		public static readonly BindableProperty AutoPlayProperty =
+			BindableProperty.Create<CrossVideoPlayerView, bool>(p => p.AutoPlay, true);
+
+		public bool AutoPlay
+		{
+			get
+			{
+				return (bool)GetValue(AutoPlayProperty);
+			}
+			set
+			{
+				SetValue(AutoPlayProperty, value);
+			}
+		}
+
+
+		/// <summary>
+		/// The scale format of the video which is in most cases 16:9 (1.77) or 4:3 (1.33).
+		/// </summary>
+		public static readonly BindableProperty VideoScaleProperty =
             BindableProperty.Create<CrossVideoPlayerView, double>(p => p.VideoScale, 1.77);
 
         /// <summary>

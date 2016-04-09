@@ -9,47 +9,52 @@ using View = Xamarin.Forms.View;
 
 namespace CrossVideoPlayer.FormsPlugin.Droid
 {
-    /// <summary>
-    /// CrossVideoPlayer Renderer for Android.
-    /// </summary>
-    public class CrossVideoPlayerViewRenderer : ViewRenderer
-    {
+	/// <summary>
+	/// CrossVideoPlayer Renderer for Android.
+	/// </summary>
+	public class CrossVideoPlayerViewRenderer : ViewRenderer
+	{
 
-        /// <summary>
-        /// Used for registration with dependency service
-        /// </summary>
-        public static void Init()
-        {
-        }
+		/// <summary>
+		/// Used for registration with dependency service
+		/// </summary>
+		public static void Init()
+		{
+		}
 
-        protected override void OnElementChanged(ElementChangedEventArgs<View> e)
-        {
-            base.OnElementChanged(e);
+		protected override void OnElementChanged(ElementChangedEventArgs<View> e)
+		{
+			base.OnElementChanged(e);
 
-            var crossVideoPlayerView = Element as CrossVideoPlayerView;
+			var crossVideoPlayerView = Element as CrossVideoPlayerView;
 
-            if ((crossVideoPlayerView != null) && (e.OldElement == null))
-            {
-                var metrics = Resources.DisplayMetrics;
+			if ((crossVideoPlayerView != null) && (e.OldElement == null))
+			{
+				if (crossVideoPlayerView.VideoSource == null) return;
 
-                crossVideoPlayerView.HeightRequest = metrics.WidthPixels/metrics.Density/crossVideoPlayerView.VideoScale;
+				var metrics = Resources.DisplayMetrics;
 
-                var videoView = new VideoView(Context);
+				crossVideoPlayerView.HeightRequest = metrics.WidthPixels/metrics.Density/crossVideoPlayerView.VideoScale;
 
-                var uri = Android.Net.Uri.Parse(crossVideoPlayerView.VideoSource);
+				var videoView = new VideoView(Context);
 
-                videoView.SetVideoURI(uri);
+				var uri = Android.Net.Uri.Parse(crossVideoPlayerView.VideoSource);
 
-                var mediaController = new MediaController(Context);
+				videoView.SetVideoURI(uri);
 
-                mediaController.SetAnchorView(videoView);
+				var mediaController = new MediaController(Context);
 
-                videoView.SetMediaController(mediaController);
+				mediaController.SetAnchorView(videoView);
 
-                videoView.Start();
+				videoView.SetMediaController(mediaController);
 
-                SetNativeControl(videoView);
-            }
-        }
-    }
+				if (crossVideoPlayerView.AutoPlay)
+				{
+					videoView.Start();
+				}
+
+				SetNativeControl(videoView);
+			}
+		}
+	}
 }

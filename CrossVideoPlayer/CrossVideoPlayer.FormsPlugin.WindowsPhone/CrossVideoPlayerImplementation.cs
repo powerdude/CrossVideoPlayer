@@ -36,8 +36,9 @@ namespace CrossVideoPlayer.FormsPlugin.WindowsPhone
 
             if ((crossVideoPlayerView != null) && (e.OldElement == null))
             {
+				if (crossVideoPlayerView.VideoSource == null) return;
 
-                var mediaElement = new MediaElement
+				var mediaElement = new MediaElement
                 {
                     Source = new Uri(crossVideoPlayerView.VideoSource),
                     AutoPlay = true,
