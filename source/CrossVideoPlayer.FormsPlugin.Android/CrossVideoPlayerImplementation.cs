@@ -2,20 +2,19 @@ using Android.Widget;
 using CrossVideoPlayer.FormsPlugin;
 using CrossVideoPlayer.FormsPlugin.Droid;
 using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using View = Xamarin.Forms.View;
 
 [assembly: ExportRenderer(typeof(CrossVideoPlayerView), typeof(CrossVideoPlayerViewRenderer))]
-
 namespace CrossVideoPlayer.FormsPlugin.Droid
 {
 	/// <summary>
 	/// CrossVideoPlayer Renderer for Android.
 	/// </summary>
-	public class CrossVideoPlayerViewRenderer : ViewRenderer
+	public class CrossVideoPlayerViewRenderer : ViewRenderer<CrossVideoPlayerView,VideoView>
 	{
-
 		/// <summary>
 		/// Used for registration with dependency service
 		/// </summary>
@@ -23,62 +22,85 @@ namespace CrossVideoPlayer.FormsPlugin.Droid
 		{
 		}
 
-		protected override void OnElementChanged(ElementChangedEventArgs<View> e)
+		protected override void OnElementChanged(ElementChangedEventArgs<CrossVideoPlayerView> e)
 		{
 			base.OnElementChanged(e);
 
-			var crossVideoPlayerView = Element as CrossVideoPlayerView;
+			System.Diagnostics.Debug.WriteLine("CrossVideoPlayer: changing element");
 
-			if ((crossVideoPlayerView != null) && (e.OldElement == null))
-			{
-				if (string.IsNullOrEmpty(crossVideoPlayerView.VideoSource)) return;
+			var element = new VideoView(Context);
+			element.Prepared += MediaElement_Prepared;
+			element.Error += Element_Error;
+			element.Completion += Element_Completion;
 
-				var metrics = Resources.DisplayMetrics;
+			var mediaController = new MediaController(Context);
+			mediaController.SetAnchorView(element);
+			element.SetMediaController(mediaController);
+			SetNativeControl(element);
 
-				crossVideoPlayerView.HeightRequest = metrics.WidthPixels/metrics.Density/crossVideoPlayerView.VideoScale;
-
-				var mediaElement = new VideoView(Context);
-
-				var uri = Android.Net.Uri.Parse(crossVideoPlayerView.VideoSource);
-
-				mediaElement.SetVideoURI(uri);
-
-				// Hook up event handlers
-				mediaElement.Prepared += (o, e1) => { crossVideoPlayerView.OnMediaLoaded(); };
-				mediaElement.Error += (o, e1) => { crossVideoPlayerView.OnMediaErrorOccurred(e1.What.ToString()); };
-				mediaElement.Completion += (o, e1) => { crossVideoPlayerView.OnMediaCompleted(); };
-				//videoView.Info += (o, e1) => { };
-
-
-				// Hook up commands
-				crossVideoPlayerView.PlayCommand = new Command(() => mediaElement.Start());
-				crossVideoPlayerView.PauseCommand = new Command(() => {
-					System.Diagnostics.Debug.WriteLine("CrossVideoPlayer: Pause");
-					mediaElement.Pause();
-				}
-				, () => mediaElement.IsPlaying);
-				crossVideoPlayerView.SeekCommand = new Command<TimeSpan>((timeSpan) => {
-					mediaElement.SeekTo((int)timeSpan.TotalMilliseconds);
-				}, (timeSpan) =>
-				{
-					return timeSpan.TotalMilliseconds < mediaElement.CurrentPosition;
-				});
-				crossVideoPlayerView.StopCommand = new Command(() => mediaElement.StopPlayback());
-				crossVideoPlayerView.MuteCommand = new Command<bool>((muted) => { }, (muted) => false);
-
-				var mediaController = new MediaController(Context);
-
-				mediaController.SetAnchorView(mediaElement);
-
-				mediaElement.SetMediaController(mediaController);
-
-				if (crossVideoPlayerView.AutoPlay)
-				{
-					mediaElement.Start();
-				}
-
-				SetNativeControl(mediaElement);
+			// Hook up commands
+			Element.PlayCommand = new Command(() => Control.Start());
+			Element.PauseCommand = new Command(() => {
+				System.Diagnostics.Debug.WriteLine("CrossVideoPlayer: Pause");
+				Control.Pause();
 			}
+			, () => element.IsPlaying);
+			Element.SeekCommand = new Command<TimeSpan>((timeSpan) => {
+				Control.SeekTo((int)timeSpan.TotalMilliseconds);
+			}, (timeSpan) =>
+			{
+				return timeSpan.TotalMilliseconds < Control.CurrentPosition;
+			});
+			Element.StopCommand = new Command(() => Control.StopPlayback());
+			Element.MuteCommand = new Command<bool>((muted) => { }, (muted) => false);
+
+			UpdateUri();
+		}
+
+		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			if (string.Compare(e.PropertyName, "VideoSource", StringComparison.OrdinalIgnoreCase) == 0)
+			{
+				UpdateUri();
+			}
+
+			base.OnElementPropertyChanged(sender, e);
+		}
+
+		private void Element_Completion(object sender, EventArgs e)
+		{
+			Element?.OnMediaCompleted();
+		}
+
+		private void Element_Error(object sender, Android.Media.MediaPlayer.ErrorEventArgs e)
+		{
+			Element?.OnMediaErrorOccurred(e.What.ToString());
+
+		}
+
+		private void UpdateUri()
+		{
+			if (string.IsNullOrEmpty(Element.VideoSource)) return;
+
+			var metrics = Resources.DisplayMetrics;
+
+			Element.HeightRequest = metrics.HeightPixels / metrics.Density / Element.VideoScale;
+			Element.WidthRequest = metrics.WidthPixels / metrics.Density / Element.VideoScale;
+
+			var uri = Android.Net.Uri.Parse(Element.VideoSource);
+
+			Control.SetVideoURI(uri);
+
+			if (Element.AutoPlay)
+			{
+				Control.Start();
+			}
+
+		}
+
+		private void MediaElement_Prepared(object sender, EventArgs e)
+		{
+			Element?.OnMediaLoaded();
 		}
 	}
 }

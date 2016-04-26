@@ -109,6 +109,7 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\CrossVideoPlayer.TestApp\CrossVideoPlayer.TestApp.csproj">
+      <Project>{00e09d65-8c6d-41f1-9777-d72616325810}</Project>
       <Name>CrossVideoPlayer.TestApp</Name>
     </ProjectReference>
   </ItemGroup>

@@ -16,6 +16,7 @@ namespace CrossVideoPlayer.TestApp.Droid
 		{
 			base.OnCreate(bundle);
 
+			CrossVideoPlayer.FormsPlugin.Droid.CrossVideoPlayerViewRenderer.Init();
 			global::Xamarin.Forms.Forms.Init(this, bundle);
 			LoadApplication(new App());
 		}
