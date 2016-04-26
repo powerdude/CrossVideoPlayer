@@ -28,23 +28,27 @@ namespace CrossVideoPlayer.FormsPlugin.Droid
 
 			System.Diagnostics.Debug.WriteLine("CrossVideoPlayer: changing element");
 
-			var element = new VideoView(Context);
-			element.Prepared += MediaElement_Prepared;
-			element.Error += Element_Error;
-			element.Completion += Element_Completion;
+		    if (Control == null)
+		    {
+			    System.Diagnostics.Debug.WriteLine("CrossVideoPlayer: creating control");
+                var element = new VideoView(Context);
+		        element.Prepared += MediaElement_Prepared;
+		        element.Error += Element_Error;
+		        element.Completion += Element_Completion;
 
-			var mediaController = new MediaController(Context);
-			mediaController.SetAnchorView(element);
-			element.SetMediaController(mediaController);
-			SetNativeControl(element);
+		        var mediaController = new MediaController(Context);
+		        mediaController.SetAnchorView(element);
+		        element.SetMediaController(mediaController);
+		        SetNativeControl(element);
+		    }
 
-			// Hook up commands
+		    // Hook up commands
 			Element.PlayCommand = new Command(() => Control.Start());
 			Element.PauseCommand = new Command(() => {
 				System.Diagnostics.Debug.WriteLine("CrossVideoPlayer: Pause");
 				Control.Pause();
 			}
-			, () => element.IsPlaying);
+			, () => Control.IsPlaying);
 			Element.SeekCommand = new Command<TimeSpan>((timeSpan) => {
 				Control.SeekTo((int)timeSpan.TotalMilliseconds);
 			}, (timeSpan) =>
