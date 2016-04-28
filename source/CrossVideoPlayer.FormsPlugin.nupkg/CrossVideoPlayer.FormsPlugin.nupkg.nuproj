@@ -40,9 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.Abstractions\CrossVideoPlayer.FormsPlugin.csproj" />
-    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.Android\CrossVideoPlayer.FormsPlugin.Android.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.Android\CrossVideoPlayer.FormsPlugin.Droid.csproj" />
     <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.iOSUnified\CrossVideoPlayer.FormsPlugin.iOSUnified.csproj" />
-    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WindowsPhone\CrossVideoPlayer.FormsPlugin.WindowsPhone.csproj" />
+    <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WindowsPhone\CrossVideoPlayer.FormsPlugin.WinPhone.csproj" />
     <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WinRT\CrossVideoPlayer.FormsPlugin.WinRT.csproj" />
     <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WinRT.Phone\CrossVideoPlayer.FormsPlugin.WinRT.Phone.csproj" />
     <ProjectReference Include="..\CrossVideoPlayer.FormsPlugin.WinUWP\CrossVideoPlayer.FormsPlugin.WinUWP.csproj" />
